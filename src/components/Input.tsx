@@ -1,5 +1,5 @@
-import { FC } from "react";
-interface TextareaProps {
+import { ChangeEvent, FC } from "react";
+interface InputProps {
     className?: string;
     onChange?: (text: string) => void;
     value?: string;
@@ -7,19 +7,19 @@ interface TextareaProps {
     readonly?: boolean;
 }
 
-export const Textarea: FC<TextareaProps> = (props) => {
+export const Input: FC<InputProps> = (props) => {
     const { className, onChange, value, placeholder, ...otherProps } = props;
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onChange?.(e.target.value);
     };
 
     return (
-        <div className={`textarea ${className}`}>
+        <div className={`input ${className}`}>
             <textarea
                 value={value}
                 placeholder={placeholder}
-                className="textarea__element"
+                className="input__element"
                 onChange={onChangeHandler}
                 {...otherProps}
             />
