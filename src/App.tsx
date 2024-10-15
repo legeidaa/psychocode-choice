@@ -1,11 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FirstStep } from "./components/steps/FirstStep";
 import {  step } from "./store/quizDataSelectors";
 import { SecondStep } from "./components/steps/SecondStep";
+import { setStep } from "./store/quizDataSlice";
 
 function App() {
     const currentStep = useSelector(step);
-
+    const dispatch = useDispatch();
+    // dispatch(setStep(0));
     const stepContnent = () => {
         switch (currentStep) {
             case 0:
@@ -21,6 +23,7 @@ function App() {
             case 5:
                 return <></>;
             default:
+                dispatch(setStep(0));
                 return <FirstStep />;
         }
     };

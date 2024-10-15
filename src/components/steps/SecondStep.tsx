@@ -2,8 +2,9 @@ import { FC } from "react";
 import { ChoicesList } from "../ChiocesList";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    addProsToDo,
-    changeProsToDo,
+    addChoice,
+    changeChoice,
+    deleteChoice,
     setNextStep,
     setPrevStep,
 } from "../../store/quizDataSlice";
@@ -14,10 +15,14 @@ export const SecondStep: FC = () => {
     const dispatch = useDispatch();
 
     const handleInputChange = (value: string, i: number) => {
-        dispatch(changeProsToDo({ title: value, i }));
+        dispatch(changeChoice({ row: "prosToDo", title: value, i }));
     };
     const addChoiceInput = () => {
-        dispatch(addProsToDo({ title: "" }));
+        dispatch(addChoice({ row: "prosToDo", title: "" }));
+    };
+
+    const handleRowDelete = (i: number) => {
+        dispatch(deleteChoice({ row: "prosToDo", i }));
     };
     return (
         <div>
@@ -38,6 +43,7 @@ export const SecondStep: FC = () => {
             <ChoicesList
                 values={choices.map((choice) => choice.title)}
                 onInputChange={handleInputChange}
+                onRowDelete={handleRowDelete}
             />
             <button className="btn" onClick={addChoiceInput}>
                 Добавить еще

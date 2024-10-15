@@ -2,13 +2,14 @@ import { ChangeEvent, FC } from "react";
 interface InputProps {
     className?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    onDelete?: () => void;
     value?: string;
     placeholder?: string;
     readonly?: boolean;
 }
 
 export const Input: FC<InputProps> = (props) => {
-    const { className, onChange, value, placeholder, ...otherProps } = props;
+    const { className, onChange, onDelete, value, placeholder, ...otherProps } = props;
     console.log(value);
     
 
@@ -25,6 +26,7 @@ export const Input: FC<InputProps> = (props) => {
                 onChange={onChangeHandler}
                 {...otherProps}
             />
+            {onDelete && <button className="input__delete" onClick={onDelete} />}
         </div>
     );
 };
