@@ -1,7 +1,7 @@
 import { ChangeEvent, FC } from "react";
 interface InputProps {
     className?: string;
-    onChange?: (text: string) => void;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     value?: string;
     placeholder?: string;
     readonly?: boolean;
@@ -9,14 +9,16 @@ interface InputProps {
 
 export const Input: FC<InputProps> = (props) => {
     const { className, onChange, value, placeholder, ...otherProps } = props;
+    console.log(value);
+    
 
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onChange?.(e.target.value);
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        onChange?.(e);
     };
 
     return (
         <div className={`input ${className}`}>
-            <textarea
+            <input
                 value={value}
                 placeholder={placeholder}
                 className="input__element"

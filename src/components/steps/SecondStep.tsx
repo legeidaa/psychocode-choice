@@ -1,12 +1,24 @@
 import { FC } from "react";
 import { ChoicesList } from "../ChiocesList";
-import { useDispatch } from "react-redux";
-import { setNextStep, setPrevStep } from "../../store/quizDataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    addProsToDo,
+    changeProsToDo,
+    setNextStep,
+    setPrevStep,
+} from "../../store/quizDataSlice";
+import { prosToDo } from "../../store/quizDataSelectors";
 
 export const SecondStep: FC = () => {
-    const values = ["sadasd", "asdad"];
-    
+    const choices = useSelector(prosToDo);
     const dispatch = useDispatch();
+
+    const handleInputChange = (value: string, i: number) => {
+        dispatch(changeProsToDo({ title: value, i }));
+    };
+    const addChoiceInput = () => {
+        dispatch(addProsToDo({ title: "" }));
+    };
     return (
         <div>
             <h2 className="subtitle">
@@ -23,7 +35,13 @@ export const SecondStep: FC = () => {
                 </p>
             </div>
 
-            <ChoicesList values={values} />
+            <ChoicesList
+                values={choices.map((choice) => choice.title)}
+                onInputChange={handleInputChange}
+            />
+            <button className="btn" onClick={addChoiceInput}>
+                Добавить еще
+            </button>
             <div className="btn-wrapper">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
                     Назад

@@ -1,5 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { quizDataReducer } from "./quizDataSlice";
+import { loadState, saveState } from "./sessionStorage";
+
+
+const persistedState = loadState();
 
 export const rootReducer = combineReducers({
     quiz: quizDataReducer,
@@ -7,7 +11,12 @@ export const rootReducer = combineReducers({
 
 export const store = configureStore({
     reducer: rootReducer,
+    preloadedState: persistedState,
     devTools: true,
+});
+
+store.subscribe(() => {
+    saveState(store.getState());
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -3,19 +3,20 @@ import { Input } from "./Input";
 
 interface ChoicesListProps {
     values: string[];
+    onInputChange: (value: string, i: number) => void;
 }
 
-export const ChoicesList: FC<ChoicesListProps> = ({ values }) => {
-    const handleInputChange = (value: string, i: number) => {
-        values[i] = value;
-    };
+export const ChoicesList: FC<ChoicesListProps> = ({
+    values,
+    onInputChange,
+}) => {
     return (
         <ul className="choices-list">
             {values.map((value, i) => (
-                <li className="choices-list__item">
+                <li key={i} className="choices-list__item">
                     <Input
                         value={value}
-                        onChange={(value) => handleInputChange(value, i)}
+                        onChange={(e) => onInputChange(e.target.value, i)}
                     />
                 </li>
             ))}
