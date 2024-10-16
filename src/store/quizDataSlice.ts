@@ -1,12 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { steps } from "../components/steps/steps";
 interface Choice {
     title: string;
-    weigth?: number | undefined;
+    weigth?: number;
 }
-
-// interface ChangeChoicePayload extends Choice {
-//     i: number;
-// }
 
 type Choices = Choice[];
 interface InitialState {
@@ -18,13 +15,16 @@ interface InitialState {
     consNotToDo: Choices;
 }
 
-type ChoicesRows = keyof Pick<InitialState, "prosToDo" | "consToDo" | "prosNotToDo" | "consNotToDo">
+type ChoicesRows = keyof Pick<
+    InitialState,
+    "prosToDo" | "consToDo" | "prosNotToDo" | "consNotToDo"
+>;
 
-interface ChangeChoicePayload extends Choice {
+interface ChangeChoicePayload extends Omit<Choice, "title"> {
+    title?: string;
     i: number;
     row: ChoicesRows;
 }
-
 
 const initialState: InitialState = {
     dilemma: "",
@@ -47,24 +47,30 @@ export const quizDataSlice = createSlice({
             state.step = action.payload;
         },
         setNextStep: (state) => {
-            state.step = state.step >= 5 ? 0 : state.step + 1;
+            state.step = state.step >= steps.length - 1 ? 0 : state.step + 1;
         },
         setPrevStep: (state) => {
-            state.step = state.step - 1;
+            state.step = state.step > 0 ? state.step - 1 : 0;
         },
 
-        addChoice: (state, action: PayloadAction<{row: ChoicesRows, title: string}>) => {
-            const {row, title} = action.payload
-            state[row].push({title})
+        addChoice: (
+            state,
+            action: PayloadAction<{ row: ChoicesRows; title: string }>
+        ) => {
+            const { row, title } = action.payload;
+            state[row].push({ title });
         },
 
         changeChoice: (state, action: PayloadAction<ChangeChoicePayload>) => {
             const i = action.payload.i;
             const title = action.payload.title;
-            const weigth = action.payload.weigth || action.payload.weigth;
+            const weigth = action.payload.weigth;
             const row = action.payload.row;
 
-            state[row][i].title = title;
+            if (title) {
+                state[row][i].title = title;
+            }
+
             if (weigth) {
                 state[row][i].weigth = weigth;
             }

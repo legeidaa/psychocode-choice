@@ -1,57 +1,31 @@
 import { FC } from "react";
-import { ChoicesList } from "../ChiocesList";
+import { Textarea } from "../Textarea";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    addChoice,
-    changeChoice,
-    deleteChoice,
-    setNextStep,
-    setPrevStep,
-} from "../../store/quizDataSlice";
-import { prosToDo } from "../../store/quizDataSelectors";
+import { setDilemma, setNextStep } from "../../store/quizDataSlice";
+import { dilemma } from "../../store/quizDataSelectors";
 
 export const SecondStep: FC = () => {
-    const choices = useSelector(prosToDo);
     const dispatch = useDispatch();
-
-    const handleInputChange = (value: string, i: number) => {
-        dispatch(changeChoice({ row: "prosToDo", title: value, i }));
-    };
-    const addChoiceInput = () => {
-        dispatch(addChoice({ row: "prosToDo", title: "" }));
-    };
-
-    const handleRowDelete = (i: number) => {
-        dispatch(deleteChoice({ row: "prosToDo", i }));
-    };
+    const dilemmaValue = useSelector(dilemma);
+    const onDilemmaChange = (text: string) => dispatch(setDilemma(text));
     return (
-        <div>
+        <div className="container">
+            <h1 className="title">
+                ПСИХоКОД
+                <span className="text_yellow">ВЫБОРА</span>
+            </h1>
             <h2 className="subtitle">
-                ПСИХоКОД <span className="text_yellow">ВЫБОРА</span>
+                <span className="text_yellow">Сделать или не сделать</span>, вот
+                в чем вопрос
             </h2>
-            <div className="description">
-                <p className="description__p">
-                    Если вы это <span className="text_yellow">СДЕЛАЕТЕ</span>,
-                    какие <span className="text_yellow">плюсы</span>, выгоды,
-                    преимущества, пользу от этого получите?
-                </p>
-                <p className="description__p">
-                    Хорошо обдумайте и впишите каждый плюс в отдельную строку
-                </p>
+            <Textarea onChange={onDilemmaChange} value={dilemmaValue} />
+            <div className="example">
+                <p>Например:</p>
+                <p>Купить ли мне автомобиль?</p>
+                <p>Стоит ли мне покупать автомобиль?</p>
+                <p>Купить автомобиль или не купить?</p>
             </div>
-
-            <ChoicesList
-                values={choices.map((choice) => choice.title)}
-                onInputChange={handleInputChange}
-                onRowDelete={handleRowDelete}
-            />
-            <button className="btn" onClick={addChoiceInput}>
-                Добавить еще
-            </button>
             <div className="btn-wrapper">
-                <button className="btn" onClick={() => dispatch(setPrevStep())}>
-                    Назад
-                </button>
                 <button className="btn" onClick={() => dispatch(setNextStep())}>
                     Далее
                 </button>

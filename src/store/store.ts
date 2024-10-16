@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { quizDataReducer } from "./quizDataSlice";
-import { loadState, saveState } from "./sessionStorage";
+import { loadState, saveState } from "./localStorage";
 
 const persistedState = loadState();
 
