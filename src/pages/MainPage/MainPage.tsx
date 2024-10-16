@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
-import { step } from "./store/quizDataSelectors";
-import { steps } from "./components/steps/steps";
+import { step } from "../../store/quizDataSelectors";
+import { steps } from "../../components/steps/steps";
+import { FC } from "react";
 
-function App() {
+export const MainPage: FC = () => {
     const currentStep = useSelector(step);
     const stepContnent = () => {
         for (let i = 0; i < steps.length; i++) {
@@ -15,11 +16,8 @@ function App() {
 
     return (
         <>
-            <header></header>
             <main>{stepContnent()}</main>
             <footer></footer>
         </>
     );
 }
-
-export default App;
