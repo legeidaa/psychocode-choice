@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { step } from "../../store/quizDataSelectors";
 import { steps } from "../../components/steps/steps";
 import { FC } from "react";
+import { Footer } from "../../components/Footer";
 
 export const MainPage: FC = () => {
     const currentStep = useSelector(step);
@@ -17,7 +18,7 @@ export const MainPage: FC = () => {
     return (
         <>
             <main>{stepContnent()}</main>
-            <footer></footer>
+            <Footer />
         </>
     );
 }
