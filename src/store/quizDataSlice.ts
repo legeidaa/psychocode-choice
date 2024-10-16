@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { steps } from "../components/steps/steps";
-interface Choice {
+export interface Choice {
     title: string;
-    weigth?: number;
+    weight?: number;
 }
 
-type Choices = Choice[];
+export type Choices = Choice[];
 interface InitialState {
-    dilemma: string;
+    question: string;
     step: number;
     prosToDo: Choices;
     consToDo: Choices;
@@ -27,7 +27,7 @@ interface ChangeChoicePayload extends Omit<Choice, "title"> {
 }
 
 const initialState: InitialState = {
-    dilemma: "",
+    question: "",
     step: 0,
     prosToDo: [{ title: "aa" }, { title: "bb" }, { title: "cc" }],
     consToDo: [],
@@ -39,8 +39,8 @@ export const quizDataSlice = createSlice({
     name: "quizData",
     initialState,
     reducers: {
-        setDilemma: (state, action) => {
-            state.dilemma = action.payload;
+        setQuestion: (state, action) => {
+            state.question = action.payload;
         },
 
         setStep: (state, action: PayloadAction<number>) => {
@@ -58,21 +58,21 @@ export const quizDataSlice = createSlice({
             action: PayloadAction<{ row: ChoicesRows; title: string }>
         ) => {
             const { row, title } = action.payload;
-            state[row].push({ title });
+            state[row].push({ title, weight: 10 });
         },
 
         changeChoice: (state, action: PayloadAction<ChangeChoicePayload>) => {
             const i = action.payload.i;
             const title = action.payload.title;
-            const weigth = action.payload.weigth;
+            const weight = action.payload.weight;
             const row = action.payload.row;
 
-            if (title) {
+            if (title != undefined) {
                 state[row][i].title = title;
             }
 
-            if (weigth) {
-                state[row][i].weigth = weigth;
+            if (weight != undefined) {
+                state[row][i].weight = weight;
             }
         },
 
@@ -81,14 +81,14 @@ export const quizDataSlice = createSlice({
             action: PayloadAction<{ row: ChoicesRows; i: number }>
         ) => {
             const { row, i } = action.payload;
-            console.log(row, i);
+            // console.log(row, i);
             state[row] = state[row].filter((_, index) => index !== i);
         },
     },
 });
 
 export const {
-    setDilemma,
+    setQuestion,
     deleteChoice,
     setStep,
     setNextStep,

@@ -5,10 +5,11 @@ interface TextareaProps {
     value?: string;
     placeholder?: string;
     readonly?: boolean;
+    errorText?: string;
 }
 
 export const Textarea: FC<TextareaProps> = (props) => {
-    const { className, onChange, value, placeholder, ...otherProps } = props;
+    const { className, onChange, value, placeholder, errorText, ...otherProps } = props;
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         onChange?.(e.target.value);
@@ -23,6 +24,7 @@ export const Textarea: FC<TextareaProps> = (props) => {
                 onChange={onChangeHandler}
                 {...otherProps}
             />
+            <span className="taxtarea__error">{errorText}</span>
         </div>
     );
 };

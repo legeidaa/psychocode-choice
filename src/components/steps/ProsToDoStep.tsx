@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { ChoicesList } from "../ChiocesList";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,11 +10,13 @@ import {
 } from "../../store/quizDataSlice";
 import { prosToDo } from "../../store/quizDataSelectors";
 
-export const ThirdStep: FC = () => {
+export const ProsToDoStep: FC = () => {
     const choices = useSelector(prosToDo);
     const dispatch = useDispatch();
+    const [errorText, setErrorText] = useState("");
 
     const handleInputChange = (value: string, i: number) => {
+
         dispatch(changeChoice({ row: "prosToDo", title: value, i }));
     };
     const addChoiceInput = () => {
@@ -23,6 +25,17 @@ export const ThirdStep: FC = () => {
 
     const handleRowDelete = (i: number) => {
         dispatch(deleteChoice({ row: "prosToDo", i }));
+    };
+    
+    const onNextBtnClick = () => {
+        for (const { title } of choices) {
+            if (title.length === 0) {
+                setErrorText("Поле не может быть пустым");
+                return;
+            }
+        }
+        setErrorText("");
+        dispatch(setNextStep());
     };
     return (
         <div>
@@ -41,10 +54,12 @@ export const ThirdStep: FC = () => {
             </div>
 
             <ChoicesList
-                values={choices.map((choice) => choice.title)}
+                choices={choices}
                 onInputChange={handleInputChange}
                 onRowDelete={handleRowDelete}
+                errorText={errorText}
             />
+            
             <button className="btn" onClick={addChoiceInput}>
                 Добавить еще
             </button>
@@ -52,7 +67,7 @@ export const ThirdStep: FC = () => {
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
                     Назад
                 </button>
-                <button className="btn" onClick={() => dispatch(setNextStep())}>
+                <button className="btn" onClick={onNextBtnClick}>
                     Далее
                 </button>
             </div>

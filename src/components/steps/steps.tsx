@@ -1,5 +1,6 @@
-import { FirstStep } from "./FirstStep";
-import { SecondStep } from "./SecondStep";
-import { ThirdStep } from "./ThirdStep";
+import { QuestionStep } from "./QuestionStep";
+import { StartStep } from "./StartStep";
+import { ProsToDoStep } from "./ProsToDoStep";
+import { ProsWeigthToDoStep } from "./ProsWeigthToDoStep";
 
-export const steps = [<FirstStep />, <SecondStep />, <ThirdStep />];
+export const steps = [<StartStep />, <QuestionStep />, <ProsToDoStep />, <ProsWeigthToDoStep />];

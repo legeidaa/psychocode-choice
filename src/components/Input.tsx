@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from "react";
-interface InputProps {
+interface InputProps extends React.HTMLProps<HTMLInputElement> {
     className?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     onDelete?: () => void;
@@ -10,9 +10,8 @@ interface InputProps {
 
 export const Input: FC<InputProps> = (props) => {
     const { className, onChange, onDelete, value, placeholder, ...otherProps } = props;
-    console.log(value);
+    // console.log(value);
     
-
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         onChange?.(e);
     };

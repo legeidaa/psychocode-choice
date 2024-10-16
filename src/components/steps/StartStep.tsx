@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useDispatch} from "react-redux";
 import {  setNextStep } from "../../store/quizDataSlice";
 
-export const FirstStep: FC = () => {
+export const StartStep: FC = () => {
     const dispatch = useDispatch();
     return (
         <div className="container">
