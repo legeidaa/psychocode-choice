@@ -11,4 +11,7 @@ export default defineConfig({
             },
         },
     },
+    build: {
+        assetsInlineLimit: Number.MAX_SAFE_INTEGER,
+    },
 });

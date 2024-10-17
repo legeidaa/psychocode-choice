@@ -1,6 +1,43 @@
-@import './vars';
+@import './reset';
 
+@import './vars';
+@import './fonts';
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+main {
+    // height: 100%;
+    flex: 1;
+}
 body {
-    background:  url("../img/bg-pattern.png"), var(--gray-1);
+    background: url("../img/bg-pattern.png"), var(--gray-1);
+    font-family: 'Tilda Sans', sans-serif;
+    height: 100%;
     color: var(--white);
 }
+
+a {
+    color: var(--link-color);
+    transition: 0.15s ease-in-out;
+
+    &:hover {
+        color: var(--link-hover-color);
+    }
+
+    &:active {
+        color: var(--link-active-color);
+    }
+}
+
+@import 'components/index';
+@import 'components/footer';
+@import 'components/title';
+@import 'components/btn';
+@import 'components/input';
+@import 'components/description';
+@import 'components/choices-list';
+@import 'components/choices-weights-list';

@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
-import { step } from "../../store/quizDataSelectors";
-import { steps } from "../../components/steps/steps";
+import { step } from "../store/quizDataSelectors";
+import { steps } from "../components/steps/steps";
 import { FC } from "react";
-import { Footer } from "../../components/Footer";
+import { Footer } from "../components/Footer";
 
 export const MainPage: FC = () => {
-    const currentStep = useSelector(step);
+    const currentStep = useSelector(step); 
     const stepContnent = () => {
         for (let i = 0; i < steps.length; i++) {
             if (i === currentStep) {
+
                 return steps[i];
             }
         }

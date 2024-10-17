@@ -1,0 +1,61 @@
+.btn {
+    font-weight: 600;
+    font-size: 34px;
+    color: var(--yellow);
+    padding: 10px 45px;
+    border: 1px solid var(--btn-bg);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+
+    &:hover {
+        background: var(--btn-hover-bg);
+    }
+
+    &:active {
+        background: var(--btn-active-bg);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--btn-active-bg);
+    }
+
+    &_big {
+        font-size: 48px;
+        padding: 15px 120px;
+    }
+
+    &_round {
+        padding: 0;
+        border: none;
+    }
+
+    &_icon {
+        width: 56px;
+        height: 56px;
+        svg {
+
+        }
+    }
+}
+
+.btn-wrapper {
+    display: flex;
+    gap: 1.5rem;
+
+    &-main {
+        margin: auto;
+    }
+
+    &_centered {
+        justify-content: center;
+    }
+    &_right {
+        justify-content: flex-end;
+    }
+}

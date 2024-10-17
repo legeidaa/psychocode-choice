@@ -7,6 +7,7 @@ import {
 } from "../../store/quizDataSlice";
 import { prosToDo } from "../../store/quizDataSelectors";
 import { ChoicesWeightsList } from "../ChoicesWeightsList";
+import { Title } from "../Title";
 
 export const ProsWeigthToDoStep: FC = () => {
     const choices = useSelector(prosToDo);
@@ -25,10 +26,8 @@ export const ProsWeigthToDoStep: FC = () => {
         dispatch(setNextStep());
     };
     return (
-        <div>
-            <h2 className="subtitle">
-                ПСИХоКОД <span className="text_yellow">ВЫБОРА</span>
-            </h2>
+        <div className="container">
+            <Title size="normal" tag="h2" />
             <div className="description">
                 <p className="description__p">
                     Оцените каждый плюс по степени важности и ценности по шкале
@@ -42,7 +41,7 @@ export const ProsWeigthToDoStep: FC = () => {
                 choices={choices}
                 changeInputValue={handleInputChange}
             />
-            <div className="btn-wrapper">
+            <div className="btn-wrapper btn-wrapper_right ">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
                     Назад
                 </button>

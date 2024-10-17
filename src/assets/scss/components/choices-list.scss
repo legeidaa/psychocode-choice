@@ -1,0 +1,30 @@
+.choices-list {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+        margin: 0;
+
+        &+& {
+            margin-top: 2rem;
+        }
+    }
+
+    &__add {
+        margin: 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 20px;
+        transition: 0.15s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--link-hover-color);
+        }
+
+        &:active {
+            color: var(--link-active-color);
+        }
+    }
+}

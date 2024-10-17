@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { MainPage } from "../pages/MainPage/MainPage";
-import { DonatePage } from "../pages/MainPage/DonatePage";
-import { ResultsPage } from "../pages/MainPage/ResultsPage";
-import { ErrorPage } from "../pages/MainPage/ErrorPage";
+import { MainPage } from "../pages/MainPage";
+import { DonatePage } from "../pages/DonatePage";
+import { ResultsPage } from "../pages/ResultsPage";
+import { ErrorPage } from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {

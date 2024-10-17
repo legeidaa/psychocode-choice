@@ -24,9 +24,10 @@ export const ChoicesWeightsList: FC<ChoicesListProps> = ({
         <ul className="choices-weights-list">
             {choices.map(({ title, weight }, i) => (
                 <li key={i} className="choices-weights-list__item">
-                    <div>{title}</div>
+                    <div className="choices-weights-list__choice">{title}</div>
                     <Input
                         type="number"
+                        shapeType="weight"
                         min={10}
                         max={100}
                         value={String(weight)}

@@ -36,12 +36,6 @@ a {
     &:focus {
         outline: none;
     }
-
-    &:focus-visible {
-        // border-radius: inherit;
-        box-shadow: 0 0 0 2px var(--#{$prefix}blue-200);
-    }
-
 }
 
 h1,
@@ -94,5 +88,5 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px var(--#{$prefix}white) inset;
+    -webkit-box-shadow: 0 0 0px 1000px var(--white) inset;
 }

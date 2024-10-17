@@ -1,0 +1,35 @@
+.title {
+    margin-top: 70px;
+    margin-bottom: 70px;
+    font-weight: 900;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-wrap;
+
+    img {
+        width: 58px;
+        height: 58px;
+        margin-right: 18px;
+
+        &:first-child {
+            margin-right: 8px;
+        }
+    }
+
+    &_big {
+        font-size: 75px;
+
+        img {
+            width: 96px;
+            height: 96px;
+        }
+    }
+}
+
+.subtitle {
+    font-weight: 700;
+    font-size: 50px;
+    text-align: center;
+}

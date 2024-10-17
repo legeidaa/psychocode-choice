@@ -9,6 +9,7 @@ import {
     setPrevStep,
 } from "../../store/quizDataSlice";
 import { prosToDo } from "../../store/quizDataSelectors";
+import { Title } from "../Title";
 
 export const ProsToDoStep: FC = () => {
     const choices = useSelector(prosToDo);
@@ -16,7 +17,9 @@ export const ProsToDoStep: FC = () => {
     const [errorText, setErrorText] = useState("");
 
     const handleInputChange = (value: string, i: number) => {
-
+        if (errorText !== "" && value.length === 1) {
+            setErrorText("");
+        }
         dispatch(changeChoice({ row: "prosToDo", title: value, i }));
     };
     const addChoiceInput = () => {
@@ -26,7 +29,7 @@ export const ProsToDoStep: FC = () => {
     const handleRowDelete = (i: number) => {
         dispatch(deleteChoice({ row: "prosToDo", i }));
     };
-    
+
     const onNextBtnClick = () => {
         for (const { title } of choices) {
             if (title.length === 0) {
@@ -38,10 +41,8 @@ export const ProsToDoStep: FC = () => {
         dispatch(setNextStep());
     };
     return (
-        <div>
-            <h2 className="subtitle">
-                ПСИХоКОД <span className="text_yellow">ВЫБОРА</span>
-            </h2>
+        <div className="container">
+            <Title size="normal" tag="h2" />
             <div className="description">
                 <p className="description__p">
                     Если вы это <span className="text_yellow">СДЕЛАЕТЕ</span>,
@@ -58,12 +59,10 @@ export const ProsToDoStep: FC = () => {
                 onInputChange={handleInputChange}
                 onRowDelete={handleRowDelete}
                 errorText={errorText}
+                placeholder="Плюс"
+                onAddClick={addChoiceInput}
             />
-            
-            <button className="btn" onClick={addChoiceInput}>
-                Добавить еще
-            </button>
-            <div className="btn-wrapper">
+            <div className="btn-wrapper btn-wrapper_right">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
                     Назад
                 </button>
