@@ -2,16 +2,17 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeChoice,
-    setNextStep,
     setPrevStep,
 } from "../../../store/quizDataSlice";
 import { consNotToDo } from "../../../store/quizDataSelectors";
 import { ChoicesWeightsList } from "../../ChoicesWeightsList";
 import { Title } from "../../Title";
+import { useNavigate } from "react-router-dom";
 
 export const ConsWeigthNotToDoStep: FC = () => {
     const choices = useSelector(consNotToDo);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleInputChange = (value: string, i: number) => {
         if (value.length > 3) {
@@ -28,7 +29,8 @@ export const ConsWeigthNotToDoStep: FC = () => {
                 return;
             }
         }
-        dispatch(setNextStep());
+        
+        navigate("/results")
     };
     return (
         <div className="container">

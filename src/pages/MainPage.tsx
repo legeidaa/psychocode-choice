@@ -18,7 +18,7 @@ export const MainPage: FC = () => {
 
     return (
         <>
-            <main>{stepContnent()}</main>
+            <main className="page-steps">{stepContnent()}</main>
             <Footer />
         </>
     );

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { steps } from "../components/steps/steps";
 export interface Choice {
     title: string;
-    weight?: number;
+    weight: number;
 }
 
 export type Choices = Choice[];

@@ -1,0 +1,19 @@
+.results {
+    display: flex;
+
+    &__column {
+        width: 50%;
+        &-header {
+            
+        }
+    }
+
+    &-question {
+        border: 1px solid var(--yellow);
+        text-align: center;
+        margin: 0 auto;
+        border-radius: 36px;
+        margin-bottom: 66px;
+    }
+}
+
