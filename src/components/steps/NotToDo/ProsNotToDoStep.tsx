@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { ChoicesList } from "../ChiocesList";
+import { ChoicesList } from "../../ChiocesList";
 import { useDispatch, useSelector } from "react-redux";
 import {
     addChoice,
@@ -7,12 +7,12 @@ import {
     deleteChoice,
     setNextStep,
     setPrevStep,
-} from "../../store/quizDataSlice";
-import { prosToDo } from "../../store/quizDataSelectors";
-import { Title } from "../Title";
+} from "../../../store/quizDataSlice";
+import { prosNotToDo } from "../../../store/quizDataSelectors";
+import { Title } from "../../Title";
 
-export const ProsToDoStep: FC = () => {
-    const choices = useSelector(prosToDo);
+export const ProsNotToDoStep: FC = () => {
+    const choices = useSelector(prosNotToDo);
     const dispatch = useDispatch();
     const [errorText, setErrorText] = useState("");
 
@@ -20,14 +20,14 @@ export const ProsToDoStep: FC = () => {
         if (errorText !== "" && value.length === 1) {
             setErrorText("");
         }
-        dispatch(changeChoice({ row: "prosToDo", title: value, i }));
+        dispatch(changeChoice({ row: "prosNotToDo", title: value, i }));
     };
     const addChoiceInput = () => {
-        dispatch(addChoice({ row: "prosToDo", title: "" }));
+        dispatch(addChoice({ row: "prosNotToDo", title: "" }));
     };
 
     const handleRowDelete = (i: number) => {
-        dispatch(deleteChoice({ row: "prosToDo", i }));
+        dispatch(deleteChoice({ row: "prosNotToDo", i }));
     };
 
     const onNextBtnClick = () => {
@@ -45,12 +45,14 @@ export const ProsToDoStep: FC = () => {
             <Title size="normal" tag="h2" />
             <div className="description">
                 <p className="description__p">
-                    Если вы это <span className="text_yellow">СДЕЛАЕТЕ</span>,
-                    какие <span className="text_yellow">плюсы</span>, выгоды,
-                    преимущества, пользу от этого получите?
+                    Пришло время подумать о том, что будет, если это
+                    <span className="text_yellow"> НЕ СДЕЛАТЬ</span>, и оставить
+                    как есть. Какие <span className="text_yellow"> плюсы</span>,
+                    выгоды, преимущества у этого выбора? Что ценное останется
+                    при вас, если вы ничего не измените.
                 </p>
                 <p className="description__p">
-                    Хорошо обдумайте и впишите каждый плюс в отдельную строку
+                    Хорошо обдумайте и впишите каждый плюс в отдельную строку.
                 </p>
             </div>
 

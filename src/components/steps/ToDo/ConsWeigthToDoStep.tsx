@@ -4,17 +4,20 @@ import {
     changeChoice,
     setNextStep,
     setPrevStep,
-} from "../../store/quizDataSlice";
-import { prosToDo } from "../../store/quizDataSelectors";
-import { ChoicesWeightsList } from "../ChoicesWeightsList";
-import { Title } from "../Title";
+} from "../../../store/quizDataSlice";
+import { consToDo } from "../../../store/quizDataSelectors";
+import { ChoicesWeightsList } from "../../ChoicesWeightsList";
+import { Title } from "../../Title";
 
-export const ProsWeigthToDoStep: FC = () => {
-    const choices = useSelector(prosToDo);
+export const ConsWeigthToDoStep: FC = () => {
+    const choices = useSelector(consToDo);
     const dispatch = useDispatch();
 
     const handleInputChange = (value: string, i: number) => {
-        dispatch(changeChoice({ row: "prosToDo", weight: Number(value), i }));
+        if (value.length > 3) {
+            return;
+        }
+        dispatch(changeChoice({ row: "consToDo", weight: Number(value), i }));
     };
 
     const onNextBtnClick = () => {
@@ -30,10 +33,12 @@ export const ProsWeigthToDoStep: FC = () => {
             <Title size="normal" tag="h2" />
             <div className="description">
                 <p className="description__p">
-                    Оцените каждый плюс по степени важности и ценности по шкале
-                    от 10 до 100, где 100 - максимальная важность и главная
-                    причина <span className="text_yellow">СДЕЛАТЬ</span>, а 10 -
-                    приятный бонус, без которого в принципе можно и обойтись
+                    Оцените каждый минус по степени важности и объему негативных
+                    последствий, если вы это
+                    <span className="text_yellow"> СДЕЛАЕТЕ</span>, по шкале от
+                    10 до 100, где 100 - максимальный минус, именно тот, который
+                    и заставляет вас мучиться вопросом выбора, а 10 - маленькая
+                    неприятность, которую можно легко пережить.
                 </p>
             </div>
 

@@ -29,10 +29,62 @@ interface ChangeChoicePayload extends Omit<Choice, "title"> {
 const initialState: InitialState = {
     question: "",
     step: 0,
-    prosToDo: [{ title: "aa" }, { title: "bb" }, { title: "cc" }],
-    consToDo: [],
-    prosNotToDo: [],
-    consNotToDo: [],
+    prosToDo: [
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+    ],
+    consToDo: [
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+    ],
+    prosNotToDo: [
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+    ],
+    consNotToDo: [
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+        {
+            title: "",
+            weight: 10,
+        },
+    ],
 };
 
 export const quizDataSlice = createSlice({
