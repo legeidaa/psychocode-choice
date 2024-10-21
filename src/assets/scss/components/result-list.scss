@@ -1,0 +1,23 @@
+.result-list {
+
+    &__icon {
+        margin: 0 auto;
+        color: var(--yellow);
+    }
+
+    &__ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__item {
+        font-size: 28px;
+        font-weight: 500;
+        margin-bottom: 2.5rem;
+    }
+
+    &_cons {
+        margin-top: auto;
+    }
+}

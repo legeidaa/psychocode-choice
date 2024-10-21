@@ -33,7 +33,7 @@ export const ChoicesWeightsList: FC<ChoicesListProps> = ({
                         value={String(weight)}
                         onChange={(e) => changeInputValue(e.target.value, i)}
                         onBlur={(e) => onBlur(e.target.value, i)}
-                        placeholder="10"
+                        placeholder="50"
                     />
                 </li>
             ))}

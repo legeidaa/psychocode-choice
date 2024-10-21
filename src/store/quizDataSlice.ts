@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { steps } from "../components/steps/steps";
 export interface Choice {
     title: string;
-    weight: number;
+    weight?: number;
 }
 
 export type Choices = Choice[];
@@ -32,57 +32,45 @@ const initialState: InitialState = {
     prosToDo: [
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
     ],
     consToDo: [
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
     ],
     prosNotToDo: [
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
     ],
     consNotToDo: [
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
         {
             title: "",
-            weight: 10,
         },
     ],
 };
@@ -91,6 +79,9 @@ export const quizDataSlice = createSlice({
     name: "quizData",
     initialState,
     reducers: {
+        resetState: () => {
+            return initialState
+        },
         setQuestion: (state, action) => {
             state.question = action.payload;
         },
@@ -140,6 +131,7 @@ export const quizDataSlice = createSlice({
 });
 
 export const {
+    resetState,
     setQuestion,
     deleteChoice,
     setStep,

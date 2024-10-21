@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Title } from "../components/Title";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     consNotToDo,
     consToDo,
@@ -10,6 +10,19 @@ import {
 } from "../store/quizDataSelectors";
 import { Footer } from "../components/Footer";
 import { ResultList } from "../components/ResultList";
+import { Choices, resetState, setStep } from "../store/quizDataSlice";
+import { useNavigate } from "react-router-dom";
+import YellowCheck from "../assets/img/yellow-check.svg?react";
+import YellowCross from "../assets/img/yellow-cross.svg?react";
+
+const reduceChoices = (arr: Choices) => {
+    return arr.reduce((acc, choice) => {
+        if (choice.weight) {
+            return acc + choice.weight;
+        }
+        return acc;
+    }, 0);
+};
 
 export const ResultsPage: FC = () => {
     const questionValue = useSelector(question);
@@ -17,23 +30,22 @@ export const ResultsPage: FC = () => {
     const consToDoArr = useSelector(consToDo);
     const prosNotToDoArr = useSelector(prosNotToDo);
     const consNotToDoArr = useSelector(consNotToDo);
-    prosToDoArr.forEach((choice) => {
-        console.log(choice, typeof choice, typeof choice.weight);
-    });
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
     const getToDoSum = () => {
-        return (
-            prosToDoArr.reduce((acc, choice) => acc + choice.weight, 0) -
-            consToDoArr.reduce((acc, choice) => acc + choice.weight, 0)
-        );
+        return reduceChoices(prosToDoArr) - reduceChoices(consToDoArr);
     };
     const getNotToDoSum = () => {
-        return (
-            prosNotToDoArr.reduce((acc, choice) => acc + choice.weight, 0) -
-            consNotToDoArr.reduce((acc, choice) => acc + choice.weight, 0)
-        );
+        return reduceChoices(prosNotToDoArr) - reduceChoices(consNotToDoArr);
     };
 
-    const onAgainBtnClick = () => {};
+    const onAgainBtnClick = () => {
+        dispatch(setStep(0));
+        dispatch(resetState());
+        navigate("/");
+    };
     const onShareBtnClick = () => {};
     const onDownloadBtnClick = () => {};
     return (
@@ -43,18 +55,19 @@ export const ResultsPage: FC = () => {
                     <Title size="normal" tag="h1" />
                     <div className="description">
                         <p className="description__p">
-                            А вот что у нас получилось{" "}
+                            А вот что у нас получилось
                         </p>
                     </div>
 
-                    <div className="results-question">
-                        {questionValue}
-                    </div>
+                    <div className="results-question">{questionValue}</div>
 
                     <div className="results">
                         <div className="results__column results__column_left">
                             <div className="results__column-header">
-                                <span className="text_yellow">ЕСЛИ ВЫ </span>
+                                <YellowCheck className="" />
+                                <span className="text_yellow results__column-header-yellow">
+                                    ЕСЛИ ВЫ{" "}
+                                </span>
                                 СДЕЛАЕТЕ
                             </div>
                             <ResultList type="pros" choices={prosToDoArr} />
@@ -63,7 +76,10 @@ export const ResultsPage: FC = () => {
                         </div>
                         <div className="results__column results__column_right">
                             <div className="results__column-header">
-                                <span className="text_yellow">ЕСЛИ ВЫ </span>
+                                <YellowCross />
+                                <span className="text_yellow results__column-header-yellow">
+                                    ЕСЛИ ВЫ{" "}
+                                </span>
                                 НЕ СДЕЛАЕТЕ
                             </div>
 
