@@ -8,13 +8,19 @@ interface ResultListProps {
     type: "pros" | "cons";
 }
 export const ResultList: FC<ResultListProps> = ({ choices, type }) => {
+    const sortedChoices = choices.slice().sort((a, b) => {
+        if (a.weight && b.weight) {
+            return b.weight - a.weight
+        }
+        return 0
+    })
     return (
         <div className={["result-list", `result-list_${type}`].join(" ")}>
             <div className="result-list__icon">
                 {type === "pros" ? <AddIcon /> : <MinusIcon />}
             </div>
             <ul className="result-list__ul">
-                {choices.map(({ title }, i) => (
+                {sortedChoices.map(({ title }, i) => (
                     <li className="result-list__item" key={i}>
                         {title}
                     </li>

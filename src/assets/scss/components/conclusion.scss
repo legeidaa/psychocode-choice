@@ -1,0 +1,29 @@
+.conclusion {
+    padding-top: 100px;
+    text-align: center;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 100px;
+
+    &__title {
+        font-size: 36px;
+        font-weight: 500;
+        margin-bottom: 80px;
+        position: relative;
+        &::after {
+            content: '';
+            max-width: 100%;
+            height: 1px;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+            background: var(--white);
+            display: block;
+            position: absolute;
+            width: 166px;
+        }
+    }
+    &__p {
+        font-size: 24px;
+    }
+}

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeChoice,
+    setIsComplete,
     setPrevStep,
 } from "../../../store/quizDataSlice";
 import { consNotToDo } from "../../../store/quizDataSelectors";
@@ -29,8 +30,8 @@ export const ConsWeigthNotToDoStep: FC = () => {
                 return;
             }
         }
-        
-        navigate("/results")
+        dispatch(setIsComplete(true));
+        navigate("/results");
     };
     return (
         <div className="container">

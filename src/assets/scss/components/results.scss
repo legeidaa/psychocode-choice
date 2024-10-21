@@ -8,7 +8,7 @@
         flex-direction: column;
 
         &-header {
-            margin: 0 auto;
+            // margin: 0 auto;
             display: flex;
             align-items: center;
             white-space: pre-wrap;
@@ -16,9 +16,15 @@
             font-size: 30px;
             font-weight: 600;
             position: relative;
+            margin-bottom: 32px;
 
             &-yellow {
                 text-shadow: 1px 1px var(--gray-light-1);
+            }
+
+            &-icon {
+                position: relative;
+                left: -12px;
             }
 
             ::before {
@@ -37,11 +43,16 @@
 
         &_left {
             padding-right: 60px;
+
         }
 
         &_right {
             padding-left: 60px;
         }
+    }
+
+    &__sum {
+        margin-top: auto;
     }
 
     &::before {
@@ -66,5 +77,89 @@
         padding: 24px 36px;
         font-weight: 700;
         font-size: 36px;
+
+    }
+
+    &__sum {
+        height: 80px;
+        border-radius: 100px;
+        background: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-2);
+        font-size: 32px;
+    }
+}
+
+@supports (display: contents) {
+    .results {
+        display: grid;
+        grid-template: auto/ 1fr 1fr;
+
+        grid-template-areas:
+
+            "header-do header-not"
+            "pros-do pros-not"
+            "cons-do cons-not"
+            "sum-do sum-not"
+        ;
+        column-gap: 120px;
+
+        &__column {
+            display: contents;
+
+            &-header {
+                order: -1;
+            }
+
+            &_left {
+
+                .results__column-header {
+                    grid-area: header-do;
+                }
+
+                .result-list_pros {
+                    grid-area: pros-do;
+                }
+
+                .result-list_cons {
+                    grid-area: cons-do;
+                }
+
+                .result__sum {
+                    grid-area: sum-do;
+                }
+            }
+
+            &_right {
+
+                .results__column-header {
+                    grid-area: header-not;
+                }
+
+                .result-list_pros {
+                    grid-area: pros-not;
+                }
+
+                .result-list_cons {
+                    grid-area: cons-not;
+                }
+
+                .result__sum {
+                    grid-area: sum-not;
+                }
+
+
+            }
+        }
+
+        &__sum {
+            order: 1;
+        }
+
+        &__devider {
+            order: 2;
+        }
     }
 }

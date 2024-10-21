@@ -7,6 +7,7 @@ export interface Choice {
 
 export type Choices = Choice[];
 interface InitialState {
+    isComplete: boolean;
     question: string;
     step: number;
     prosToDo: Choices;
@@ -27,6 +28,7 @@ interface ChangeChoicePayload extends Omit<Choice, "title"> {
 }
 
 const initialState: InitialState = {
+    isComplete: false,
     question: "",
     step: 0,
     prosToDo: [
@@ -79,8 +81,11 @@ export const quizDataSlice = createSlice({
     name: "quizData",
     initialState,
     reducers: {
+        setIsComplete: (state, action) => {
+            state.isComplete = action.payload;
+        },
         resetState: () => {
-            return initialState
+            return initialState;
         },
         setQuestion: (state, action) => {
             state.question = action.payload;
@@ -101,7 +106,7 @@ export const quizDataSlice = createSlice({
             action: PayloadAction<{ row: ChoicesRows; title: string }>
         ) => {
             const { row, title } = action.payload;
-            state[row].push({ title, weight: 10 });
+            state[row].push({ title });
         },
 
         changeChoice: (state, action: PayloadAction<ChangeChoicePayload>) => {
@@ -131,6 +136,7 @@ export const quizDataSlice = createSlice({
 });
 
 export const {
+    setIsComplete,
     resetState,
     setQuestion,
     deleteChoice,
