@@ -60,3 +60,20 @@
     height: 0;
     position: absolute;
 }
+
+.page {
+    &-not-found {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        text-align: center;
+    }
+}
+
+.not-found-title {
+    font-size: 76px;
+    margin-bottom: 32px;
+}
