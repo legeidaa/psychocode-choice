@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import { Title } from "./Title";
 import { FC } from "react";
+import CloseIcon from "../assets/img/close-cross.svg?react";
 
 Modal.setAppElement("#root");
 
@@ -24,10 +25,18 @@ export const DonateModal: FC<ModalProps> = ({
             className="results-modal"
             closeTimeoutMS={200}
         >
-            <Title size="normal" tag="h2" />
-            <h3 className="modal__subtitle">
-                Если было полезно, вы можете поблагодарить сервис
-            </h3>
+            <header className="modal__header">
+                <Title size="normal" tag="h2" />
+                <h3 className="modal__subtitle">
+                    Если было полезно, вы можете поблагодарить сервис
+                </h3>
+                <button
+                    className="btn btn_round btn_icon modal__close-btn"
+                    onClick={closeFunc}
+                >
+                    <CloseIcon className="modal__close-btn-icon" />
+                </button>
+            </header>
             <form
                 className="yoomoney-payment-form"
                 action="https://yookassa.ru/integration/simplepay/payment"

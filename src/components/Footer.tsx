@@ -15,7 +15,7 @@ export const Footer: FC = () => {
                     Psychocode ® Все права защищены. Копирование преследуется по
                     закону. 
                 </p>
-                <Link to="/donate" className="footer__text-link">
+                <Link to="/donate" className="footer__text-link" target="_blank">
                     Поддержать проект
                 </Link>
             </div>

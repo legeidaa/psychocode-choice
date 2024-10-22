@@ -32,18 +32,35 @@
     text-align: center;
 }
 
-.results-modal {
+.modal {
     &__subtitle {
         font-size: 36px;
         text-align: center;
         color: var(--white);
         font-weight: 500;
     }
+
     &__buttons {
         padding: 60px 0;
         display: flex;
         gap: 32px;
         align-items: center;
         justify-content: center;
+    }
+
+    &__header {
+        position: relative;
+    }
+
+    &__close-btn {
+        position: absolute;
+        right: -48px;
+        top: -48px;
+
+        &-icon {
+
+            width: 32px;
+            height: 32px;
+        }
     }
 }
