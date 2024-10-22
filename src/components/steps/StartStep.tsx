@@ -1,25 +1,37 @@
 import { FC } from "react";
-import { useDispatch } from "react-redux";
-import { setNextStep } from "../../store/quizDataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { resetState, setNextStep } from "../../store/quizDataSlice";
 import { Title } from "../Title";
+import { isComplete } from "../../store/quizDataSelectors";
+import { Link } from "react-router-dom";
 
 export const StartStep: FC = () => {
     const dispatch = useDispatch();
+    const isQuizComplete = useSelector(isComplete);
+
+    const onStartClick = () => {
+        dispatch(resetState());
+        dispatch(setNextStep())
+    }
     return (
         <div className="container">
             <Title size="big" tag="h1" />
             <h2 className="subtitle">
-                Сервис, который поможет Вам принять 
+                Сервис, который поможет Вам принять
                 <span className="text_yellow"> взвешенное</span> решение
             </h2>
 
             <div className="btn-wrapper btn-wrapper-main btn-wrapper_centered">
                 <button
                     className="btn btn_big"
-                    onClick={() => dispatch(setNextStep())}
+                    onClick={onStartClick}
                 >
-                    Начать
+                    {isQuizComplete ? "Начать заново" : "Начать"}
                 </button>
+
+                <Link to={"/results"} className="btn btn_big" >
+                    Результат теста
+                </Link>
             </div>
         </div>
     );
