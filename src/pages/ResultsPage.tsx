@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Title } from "../components/Title";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,7 +18,7 @@ import YellowCross from "../assets/img/yellow-cross.svg?react";
 import TelegramIcon from "../assets/img/telegram.svg?react";
 import WebsiteIcon from "../assets/img/web.svg?react";
 import { toPng } from "html-to-image";
-
+import { ResultsModal } from "../components/ResultsModal";
 declare global {
     interface Window {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,12 +44,22 @@ export const ResultsPage: FC = () => {
     const consNotToDoArr = useSelector(consNotToDo);
     const isQuizComplete = useSelector(isComplete);
     const dispatch = useDispatch();
-
     const navigate = useNavigate();
+
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
 
     const getToDoSum = () => {
         return reduceChoices(prosToDoArr) - reduceChoices(consToDoArr);
     };
+
     const getNotToDoSum = () => {
         return reduceChoices(prosNotToDoArr) - reduceChoices(consNotToDoArr);
     };
@@ -59,12 +69,22 @@ export const ResultsPage: FC = () => {
         dispatch(resetState());
         navigate("/");
     };
+    
+    useEffect(() => {
+        setTimeout(() => {
+            openModal();
+        }, 5000);
+    }, []);
+
     const downloadPng = useCallback(() => {
         if (imageRef.current === null) {
             return;
         }
         toPng(imageRef.current, {
             backgroundColor: "#3A4654",
+            style: {
+                margin: "0",
+            },
         })
             .then((dataUrl) => {
                 const link = document.createElement("a");
@@ -132,7 +152,7 @@ export const ResultsPage: FC = () => {
     }
     return (
         <>
-            <main className="page-results" >
+            <main className="page-results">
                 <div className="container">
                     <div className="image-save-container" ref={imageRef}>
                         <Title size="normal" tag="h1" />
@@ -262,6 +282,7 @@ export const ResultsPage: FC = () => {
                 </div>
             </main>
             <Footer />
+            <ResultsModal closeFunc={closeModal} isOpen={modalIsOpen} />
         </>
     );
 };

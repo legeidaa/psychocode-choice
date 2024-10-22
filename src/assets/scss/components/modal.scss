@@ -1,0 +1,48 @@
+.ReactModal__Overlay {
+    background-color: rgba(17, 25, 39, 0.45) !important;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+
+.ReactModal__Content {
+    max-width: 800px;
+    background: url("../img/bg-pattern.png"), var(--gray-1);
+    width: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    padding: 0 60px;
+    text-align: center;
+}
+
+.results-modal {
+    &__subtitle {
+        font-size: 36px;
+        text-align: center;
+        color: var(--white);
+        font-weight: 500;
+    }
+    &__buttons {
+        padding: 60px 0;
+        display: flex;
+        gap: 32px;
+        align-items: center;
+        justify-content: center;
+    }
+}
