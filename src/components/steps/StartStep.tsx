@@ -9,10 +9,12 @@ export const StartStep: FC = () => {
     const dispatch = useDispatch();
     const isQuizComplete = useSelector(isComplete);
 
+    console.log(isQuizComplete);
+
     const onStartClick = () => {
         dispatch(resetState());
-        dispatch(setNextStep())
-    }
+        dispatch(setNextStep());
+    };
     return (
         <div className="container">
             <Title size="big" tag="h1" />
@@ -22,16 +24,15 @@ export const StartStep: FC = () => {
             </h2>
 
             <div className="btn-wrapper btn-wrapper-main btn-wrapper_centered">
-                <button
-                    className="btn btn_big"
-                    onClick={onStartClick}
-                >
+                <button className="btn btn_big" onClick={onStartClick}>
                     {isQuizComplete ? "Начать заново" : "Начать"}
                 </button>
 
-                <Link to={"/results"} className="btn btn_big" >
-                    Результат теста
-                </Link>
+                {isQuizComplete && (
+                    <Link to={"/results"} className="btn btn_big">
+                        Результат теста
+                    </Link>
+                )}
             </div>
         </div>
     );

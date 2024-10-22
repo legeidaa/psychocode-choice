@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeChoice,
@@ -12,8 +12,12 @@ import { Title } from "../../Title";
 export const ProsWeigthNotToDoStep: FC = () => {
     const choices = useSelector(prosNotToDo);
     const dispatch = useDispatch();
+    const [errorText, setErrorText] = useState("");
 
     const handleInputChange = (value: string, i: number) => {
+        if (errorText !== "" && value.length >= 1) {
+            setErrorText("");
+        }
         if (value.length > 3) {
             return;
         }
@@ -23,8 +27,9 @@ export const ProsWeigthNotToDoStep: FC = () => {
     };
 
     const onNextBtnClick = () => {
-        for (const { title } of choices) {
-            if (title.length === 0) {
+        for (const { weight } of choices) {
+            if (!weight) {
+                setErrorText("Поле не может быть пустым");
                 return;
             }
         }
@@ -37,14 +42,16 @@ export const ProsWeigthNotToDoStep: FC = () => {
                 <p className="description__p">
                     Оцените каждый плюс по степени важности и ценности по шкале
                     от 10 до 100, где 100 - максимальная важность и главная
-                    причина <span className="text_yellow"> НЕ ДЕЛАТЬ</span> этого, 
-                    а 10 - приятный бонус, без которого в принципе можно и обойтись.
+                    причина <span className="text_yellow"> НЕ ДЕЛАТЬ</span>{" "}
+                    этого, а 10 - приятный бонус, без которого в принципе можно
+                    и обойтись.
                 </p>
             </div>
 
             <ChoicesWeightsList
                 choices={choices}
                 changeInputValue={handleInputChange}
+                errorText={errorText}
             />
             <div className="btn-wrapper btn-wrapper_right ">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>

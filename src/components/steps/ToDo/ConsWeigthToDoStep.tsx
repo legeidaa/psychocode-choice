@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeChoice,
@@ -13,7 +13,12 @@ export const ConsWeigthToDoStep: FC = () => {
     const choices = useSelector(consToDo);
     const dispatch = useDispatch();
 
+    const [errorText, setErrorText] = useState("");
+
     const handleInputChange = (value: string, i: number) => {
+        if (errorText !== "" && value.length >= 1) {
+            setErrorText("");
+        }
         if (value.length > 3) {
             return;
         }
@@ -21,8 +26,9 @@ export const ConsWeigthToDoStep: FC = () => {
     };
 
     const onNextBtnClick = () => {
-        for (const { title } of choices) {
-            if (title.length === 0) {
+        for (const { weight } of choices) {
+            if (!weight) {
+                setErrorText("Поле не может быть пустым");
                 return;
             }
         }
@@ -45,6 +51,7 @@ export const ConsWeigthToDoStep: FC = () => {
             <ChoicesWeightsList
                 choices={choices}
                 changeInputValue={handleInputChange}
+                errorText={errorText}
             />
             <div className="btn-wrapper btn-wrapper_right ">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
