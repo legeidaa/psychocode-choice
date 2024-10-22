@@ -1,0 +1,32 @@
+.yoomoney-payment-form {
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+
+    .input {
+        margin-right: 0;
+
+        &__element {
+            background: var(--gray-1);
+            border-radius: 100px;
+            color: var(--white);
+            border: 1px solid var(--white);
+            height: 42px;
+            font-weight: 500;
+            font-size: 17px;
+
+            &::placeholder {
+                color: var(--gray-light-1);
+            }
+        }
+    }
+
+    .ym-input-icon-rub:after {
+        height: 42px;
+        line-height: 42px;
+        color: var(--white);
+        font-weight: 500;
+    }
+}

@@ -8,7 +8,7 @@ Modal.setAppElement("#root");
 interface ModalProps {
     isOpen: boolean;
     closeFunc: () => void;
-    onAfterClose: () => void;
+    onAfterClose?: () => void;
 }
 
 export const ResultsModal: FC<ModalProps> = ({
@@ -26,10 +26,10 @@ export const ResultsModal: FC<ModalProps> = ({
             closeTimeoutMS={200}
         >
             <Title size="normal" tag="h2" />
-            <h3 className="results-modal__subtitle">
+            <h3 className="modal__subtitle">
                 Если было полезно, вы можете поблагодарить сервис
             </h3>
-            <div className="results-modal__buttons">
+            <div className="modal__buttons">
                 <button className="btn" onClick={closeFunc}>
                     Не хочу
                 </button>

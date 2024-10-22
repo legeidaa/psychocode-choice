@@ -1,9 +1,19 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Footer } from "../components/Footer";
 import { Title } from "../components/Title";
 import { Link } from "react-router-dom";
+import { DonateModal } from "../components/DonateModal";
 
 export const DonatePage: FC = () => {
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
     return (
         <>
             <main>
@@ -164,13 +174,20 @@ export const DonatePage: FC = () => {
                         <Link to={"/"} className="btn">
                             Вернуться
                         </Link>
-                        <Link to={"/"} className="btn">
+                        <button onClick={openModal} className="btn">
                             Пожертвовать
-                        </Link>
-                        <Link to={"/"} className="btn">
+                        </button>
+                        <Link
+                            to={
+                                "https://psychocode.ru/?utm_source=choice&utm_medium=web&utm_campaign=first"
+                            }
+                            target="_blank"
+                            className="btn"
+                        >
                             Подробнее
                         </Link>
                     </div>
+                    <DonateModal closeFunc={closeModal} isOpen={modalIsOpen} />
                 </div>
             </main>
             <Footer />
