@@ -28,6 +28,17 @@
     }
 }
 
+.text {
+    text-align: center;
+    color: var(--white);
+    font-weight: 300;
+    margin-bottom: 120px;
+
+    &__p {
+        font-size: 24px;
+    }
+}
+
 .error-text {
     margin-top: 10px;
     font-size: 18px;
@@ -40,4 +51,12 @@
     flex-direction: column;
     margin: 0 -50px;
     padding: 0 50px;
+}
+
+.invisible {
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
 }

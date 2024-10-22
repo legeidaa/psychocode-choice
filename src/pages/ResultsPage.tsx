@@ -45,8 +45,8 @@ export const ResultsPage: FC = () => {
     const isQuizComplete = useSelector(isComplete);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [isFirstOpenModal, setIsFirstOpenModal] = useState(false);
 
     const openModal = () => {
         setIsOpen(true);
@@ -65,16 +65,14 @@ export const ResultsPage: FC = () => {
     };
 
     const onAgainBtnClick = () => {
+        if (!isFirstOpenModal) {
+            openModal();
+            return;
+        }
         dispatch(setStep(0));
         dispatch(resetState());
         navigate("/");
     };
-    
-    useEffect(() => {
-        setTimeout(() => {
-            openModal();
-        }, 5000);
-    }, []);
 
     const downloadPng = useCallback(() => {
         if (imageRef.current === null) {
@@ -88,7 +86,7 @@ export const ResultsPage: FC = () => {
         })
             .then((dataUrl) => {
                 const link = document.createElement("a");
-                link.download = "psychocode.png";
+                link.download = "psychocode-choice.png";
                 link.href = dataUrl;
                 link.click();
             })
@@ -104,6 +102,33 @@ export const ResultsPage: FC = () => {
     const onDownloadBtnClick = () => {
         downloadPng();
     };
+
+    const onAfterModalClose = () => {
+        setIsFirstOpenModal(true);
+    };
+
+    // открытие модалки, когда узодишь за пределы окна
+    useEffect(() => {
+        const leaveDocument = (e: MouseEvent) => {
+            if (
+                e.clientY <= 0 ||
+                e.clientX <= 0 ||
+                e.clientX >= window.innerWidth ||
+                e.clientY >= window.innerHeight
+            ) {
+                if (!isFirstOpenModal) {
+                    openModal();
+                } else {
+                    document.removeEventListener("mouseleave", leaveDocument);
+                }
+            }
+        };
+        document.addEventListener("mouseleave", leaveDocument);
+
+        return () => {
+            document.removeEventListener("mouseleave", leaveDocument);
+        };
+    }, [isFirstOpenModal]);
 
     useEffect(() => {
         window.Ya.share2("ya-share2", {
@@ -121,8 +146,6 @@ export const ResultsPage: FC = () => {
             },
             hooks: {
                 onready: () => {
-                    console.log("asdadsaa");
-
                     const title = document.querySelector(".ya-share2__title");
                     if (title) {
                         title.textContent = "Поделиться сервисом";
@@ -208,10 +231,14 @@ export const ResultsPage: FC = () => {
                         <div className="conclusion">
                             <h3 className="conclusion__title">
                                 Теперь вы можете сделать вывод
+                                <br />
+                                <span className="text_yellow">
+                                    {" "}
+                                    какое решение
+                                </span>
                             </h3>
                             <p className="conclusion__p">
-                                какое решение будет для вас выгоднее,
-                                позитивнее, эффективнее.
+                                будет для вас выгоднее, позитивнее, эффективнее.
                             </p>
                             <p className="conclusion__p">
                                 Если в итоге вышло отрицательное число, значит
@@ -222,6 +249,25 @@ export const ResultsPage: FC = () => {
                             <p className="conclusion__p">
                                 Если на оба решения вы получили отрицательные
                                 числа, то "из двух зол выбирают меньшее".
+                            </p>
+                            <p className="conclusion__p">
+                                Плюсы и минусы ваших решений отсортированы по
+                                убыванию. То есть сначала идут самые полезные и
+                                положительные последствия, имеющие максимальную
+                                для вас важность и далее до приятных бонусов.
+                                Аналогично и с минусами - сначала идут те, что
+                                представляются для вас с более весомыми
+                                отрицательными последствиями до мелких
+                                неприятностей.
+                            </p>
+                            <p className="conclusion__p">
+                                Если вы попробуете пройти эту технику еще раз
+                                позднее, то вероятно, что исходя из новых
+                                условий и нового состояния, вы расставите в
+                                плюсах и минусах иные приоритеты важности. Что
+                                будет говорить о том, что ваше отношение и точка
+                                зрения к последствиям решения по данной дилемме
+                                несколько изменились.
                             </p>
                         </div>
 
@@ -282,7 +328,11 @@ export const ResultsPage: FC = () => {
                 </div>
             </main>
             <Footer />
-            <ResultsModal closeFunc={closeModal} isOpen={modalIsOpen} />
+            <ResultsModal
+                onAfterClose={onAfterModalClose}
+                closeFunc={closeModal}
+                isOpen={modalIsOpen}
+            />
         </>
     );
 };

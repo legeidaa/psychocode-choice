@@ -17,6 +17,7 @@
             font-weight: 600;
             position: relative;
             margin-bottom: 32px;
+            z-index: 2;
 
             &-yellow {
                 text-shadow: 1px 1px var(--gray-light-1);
@@ -27,7 +28,7 @@
                 left: -12px;
             }
 
-            ::before {
+            &::before {
                 content: '';
                 position: absolute;
                 top: 50%;
@@ -96,7 +97,6 @@
     .results {
         display: grid;
         grid-template: auto/ 1fr 1fr;
-
         grid-template-areas:
 
             "header-do header-not"

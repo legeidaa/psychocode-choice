@@ -6,13 +6,19 @@ import { Link } from "react-router-dom";
 Modal.setAppElement("#root");
 
 interface ModalProps {
-    isOpen: boolean,
-    closeFunc: () => void
+    isOpen: boolean;
+    closeFunc: () => void;
+    onAfterClose: () => void;
 }
 
-export const ResultsModal: FC<ModalProps> = ({isOpen, closeFunc}) => {
+export const ResultsModal: FC<ModalProps> = ({
+    isOpen,
+    closeFunc,
+    onAfterClose,
+}) => {
     return (
         <Modal
+            onAfterClose={onAfterClose}
             preventScroll
             isOpen={isOpen}
             onRequestClose={closeFunc}
