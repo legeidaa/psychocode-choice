@@ -18,7 +18,8 @@ import YellowCross from "../assets/img/yellow-cross.svg?react";
 import TelegramIcon from "../assets/img/telegram.svg?react";
 import WebsiteIcon from "../assets/img/web.svg?react";
 import { toPng } from "html-to-image";
-import { ResultsModal } from "../components/ResultsModal";
+// import { ResultsModal } from "../components/ResultsModal";
+import { DonateModal } from "../components/DonateModal";
 declare global {
     interface Window {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,6 +79,12 @@ export const ResultsPage: FC = () => {
         if (imageRef.current === null) {
             return;
         }
+        
+        const nodeToSave = imageRef.current as HTMLElement
+        console.log(nodeToSave);
+        
+        nodeToSave.style.width = '1100px'
+
         toPng(imageRef.current, {
             backgroundColor: "#3A4654",
             style: {
@@ -85,14 +92,17 @@ export const ResultsPage: FC = () => {
             },
         })
             .then((dataUrl) => {
+                nodeToSave.style.width = 'auto'
                 const link = document.createElement("a");
                 link.download = "psychocode-choice.png";
                 link.href = dataUrl;
                 link.click();
             })
             .catch((err) => {
+                nodeToSave.style.width = 'auto'
                 console.log(err);
             });
+
     }, [imageRef]);
 
     const onBackBtnClick = () => {
@@ -131,6 +141,8 @@ export const ResultsPage: FC = () => {
     }, [isFirstOpenModal]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         window.Ya.share2("ya-share2", {
             content: {
                 url: location.origin,
@@ -328,11 +340,12 @@ export const ResultsPage: FC = () => {
                 </div>
             </main>
             <Footer />
-            <ResultsModal
+            {/* <ResultsModal
                 onAfterClose={onAfterModalClose}
                 closeFunc={closeModal}
                 isOpen={modalIsOpen}
-            />
+            /> */}
+             <DonateModal closeFunc={closeModal} isOpen={modalIsOpen} onAfterClose={onAfterModalClose}/>
         </>
     );
 };

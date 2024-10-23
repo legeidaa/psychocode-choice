@@ -51,7 +51,7 @@ export const ProsWeigthToDoStep: FC = () => {
                 errorText={errorText}
                 changeInputValue={handleInputChange}
             />
-            <div className="btn-wrapper btn-wrapper_right ">
+            <div className="btn-wrapper btn-wrapper-choices btn-wrapper_right ">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
                     Назад
                 </button>

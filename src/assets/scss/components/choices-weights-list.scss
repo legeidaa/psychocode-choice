@@ -1,7 +1,8 @@
 .choices-weights-list {
     list-style: none;
     padding: 0;
-    margin-bottom: 60px;
+    margin: 0 ;
+    margin-bottom: 16px;
 
     &__item {
         margin: 0;
@@ -17,5 +18,7 @@
     &__choice {
         font-size: 28px;
         font-weight: 500;
+        padding-right: 24px;
+        word-break: break-word;
     }
 }

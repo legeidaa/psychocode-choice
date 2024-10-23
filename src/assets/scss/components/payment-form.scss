@@ -4,10 +4,12 @@
     // flex-direction: column;
     // gap: 32px;
     width: 100%;
+    max-width: 400px;
+
 
     .input {
         margin-right: 0;
-
+        
         &__element {
             background: var(--gray-1);
             border-radius: 100px;
@@ -15,6 +17,8 @@
             border: 1px solid var(--white);
             height: 42px;
             font-weight: 500;
+            padding: 0 16px;
+
             font-size: 17px;
 
             &::placeholder {
@@ -23,17 +27,35 @@
         }
     }
 
+    .ym-input-icon-rub {
+        position: relative;
+    }
+
     .ym-input-icon-rub:after {
+        content: '₽';
+        display: block;
         height: 42px;
         line-height: 42px;
         color: var(--white);
         font-weight: 500;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 30px;
+
     }
 
     .ym-payment-btn-block {
         gap: 32px;
         height: auto;
-
+        display: flex;
         flex-direction: column;
+    }
+
+    .ym-customer-info {
+        visibility: hidden;
+        overflow: hidden;
+        width: 0;
+        height: 0;
     }
 }

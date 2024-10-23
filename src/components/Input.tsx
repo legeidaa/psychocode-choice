@@ -33,7 +33,7 @@ export const Input: FC<InputProps> = (props) => {
     };
 
     return (
-        <div className={`input ${className}`}>
+        <div className={`input ${className ? className : ''}`}>
             <input
                 value={value}
                 placeholder={placeholder}

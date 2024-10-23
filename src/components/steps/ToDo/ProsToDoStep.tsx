@@ -62,7 +62,7 @@ export const ProsToDoStep: FC = () => {
                 placeholder="Плюс"
                 onAddClick={addChoiceInput}
             />
-            <div className="btn-wrapper btn-wrapper_right">
+            <div className="btn-wrapper btn-wrapper-choices btn-wrapper_right">
                 <button className="btn" onClick={() => dispatch(setPrevStep())}>
                     Назад
                 </button>

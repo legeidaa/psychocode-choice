@@ -10,8 +10,10 @@ export const Title: FC<TitleProps> = ({ size, tag }) => {
     if (tag === "h1") {
         return (
             <h1 className={size === "big" ? "title title_big" : "title"}>
-                <img src={CheckImg} alt="" />
-                <img src={CrossImg} alt="" />
+                <div className="title__icons">
+                    <img src={CheckImg} alt="" />
+                    <img src={CrossImg} alt="" />
+                </div>
                 <span>ПСИХоКОД </span>
                 <span className="text_yellow">ВЫБОРА</span>
             </h1>
@@ -20,8 +22,10 @@ export const Title: FC<TitleProps> = ({ size, tag }) => {
 
     return (
         <h2 className={size === "big" ? "title title_big" : "title"}>
-            <img src={CheckImg} alt="" />
-            <img src={CrossImg} alt="" />
+              <div className="title__icons">
+                    <img src={CheckImg} alt="" />
+                    <img src={CrossImg} alt="" />
+                </div>
             <span>ПСИХоКОД </span>
             <span className="text_yellow">ВЫБОРА</span>
         </h2>

@@ -170,7 +170,7 @@ export const DonatePage: FC = () => {
                         выбора" вы сможете принимать решения, которые приведут
                         вас к гармонии, успеху и счастью.
                     </div>
-                    <div className="btn-wrapper btn-wrapper_centered btn-wrapper-results">
+                    <div className="btn-wrapper btn-wrapper_centered btn-wrapper-donate">
                         <Link to={"/"} className="btn">
                             Вернуться
                         </Link>

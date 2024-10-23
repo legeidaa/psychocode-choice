@@ -92,13 +92,16 @@ export const quizDataSlice = createSlice({
         },
 
         setStep: (state, action: PayloadAction<number>) => {
+            window.scrollTo(0, 0);
             state.step = action.payload;
         },
         setNextStep: (state) => {
             state.step = state.step >= steps.length - 1 ? 0 : state.step + 1;
+            window.scrollTo(0, 0);
         },
         setPrevStep: (state) => {
             state.step = state.step > 0 ? state.step - 1 : 0;
+            window.scrollTo(0, 0);
         },
 
         addChoice: (

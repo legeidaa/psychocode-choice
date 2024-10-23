@@ -38,7 +38,7 @@ export const DonateModal: FC<ModalProps> = ({
                 </button>
             </header>
 
-            <form
+            {/* <form
                 className="yoomoney-payment-form"
                 action="https://yookassa.ru/integration/simplepay/payment"
                 method="post"
@@ -90,6 +90,60 @@ export const DonateModal: FC<ModalProps> = ({
                         alt="ЮKassa"
                     />
                 </div>
+            </form> */}
+
+            <form
+                className="yoomoney-payment-form"
+                action="https://yookassa.ru/integration/simplepay/payment"
+                method="post"
+                acceptCharset="utf-8"
+            >
+                <div className="ym-customer-info">
+                    <textarea
+                        className="ym-textarea ym-display-none"
+                        name="orderDetails"
+                        placeholder="Комментарий"
+                        value="Поддержать проект"
+                    >
+                        Поддержать проект
+                    </textarea>
+                </div>
+
+                <div className="ym-hidden-inputs"></div>
+
+                <input
+                    name="customerNumber"
+                    type="hidden"
+                    value="Если вам понравилось использование сервиса, по желанию вы можете отблагодарить разработчиков"
+                />
+
+                <div className="ym-payment-btn-block ym-align-space-between">
+                    <div className="ym-input-icon-rub input">
+                        <input
+                            name="sum"
+                            placeholder="0.00"
+                            className="ym-input ym-sum-input ym-required-input input__element"
+                            type="number"
+                            step="any"
+                            required
+                        />
+                    </div>
+                    <button
+                        data-text="Поблагодарить"
+                        className="ym-btn-pay ym-result-price btn"
+                    >
+                        <span className="ym-text-crop">Поблагодарить</span>
+                        <span className="ym-price-output"></span>
+                    </button>
+                    <img
+                        src="https://yookassa.ru/files/Guide_files/logo-white.svg"
+                        className="ym-logo"
+                        width="114"
+                        height="27"
+                        alt="ЮKassa"
+                    />
+                </div>
+                <input name="shopId" type="hidden" value="459980" />
             </form>
         </Modal>
     );

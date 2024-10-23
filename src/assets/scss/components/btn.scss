@@ -54,6 +54,9 @@
         margin: auto;
         flex-direction: column;
     }
+    &-choices {
+        margin-top: 56px;
+    }
 
     &-results {
         justify-content: space-between;
