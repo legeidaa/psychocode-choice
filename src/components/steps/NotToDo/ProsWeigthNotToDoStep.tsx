@@ -46,6 +46,10 @@ export const ProsWeigthNotToDoStep: FC = () => {
                     этого, а 10 - приятный бонус, без которого в принципе можно
                     и обойтись.
                 </p>
+                <p className="description__p description__p_small">
+                    Вы можете указать один и тот же вес на несколько пунктов,
+                    если по вашим ощущениям они равнозначны.
+                </p>
             </div>
 
             <ChoicesWeightsList

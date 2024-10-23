@@ -51,6 +51,7 @@ export const ConsWeigthNotToDoStep: FC = () => {
                     который и заставляет вас мучиться вопросом выбора, а 10 -
                     маленькая неприятность, которую можно легко пережить.
                 </p>
+                <p className="description__p description__p_small">Вы можете указать один и тот же вес на несколько пунктов, если по вашим ощущениям они равнозначны.</p>
             </div>
 
             <ChoicesWeightsList
