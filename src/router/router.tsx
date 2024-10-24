@@ -3,6 +3,7 @@ import { MainPage } from "../pages/MainPage";
 import { DonatePage } from "../pages/DonatePage";
 import { ResultsPage } from "../pages/ResultsPage";
 import { ErrorPage } from "../pages/ErrorPage";
+import { QuizPage } from "../pages/QuizPage";
 
 export const router = createBrowserRouter([
     {
@@ -11,11 +12,15 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: "/results",
+        path: "quiz",
+        element: <QuizPage/>,
+    },
+    {
+        path: "results",
         element: <ResultsPage/>,
     },
     {
-        path: "/donate",
+        path: "donate",
         element: <DonatePage />,
     }
 ]);

@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Title } from "../components/Title";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
     consNotToDo,
     consToDo,
@@ -11,7 +11,7 @@ import {
 } from "../store/quizDataSelectors";
 import { Footer } from "../components/Footer";
 import { ResultList } from "../components/ResultList";
-import { Choices, resetState, setStep } from "../store/quizDataSlice";
+import { Choices } from "../store/quizDataSlice";
 import { useNavigate } from "react-router-dom";
 import YellowCheck from "../assets/img/yellow-check.svg?react";
 import YellowCross from "../assets/img/yellow-cross.svg?react";
@@ -44,7 +44,6 @@ export const ResultsPage: FC = () => {
     const prosNotToDoArr = useSelector(prosNotToDo);
     const consNotToDoArr = useSelector(consNotToDo);
     const isQuizComplete = useSelector(isComplete);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isFirstOpenModal, setIsFirstOpenModal] = useState(false);
@@ -70,8 +69,6 @@ export const ResultsPage: FC = () => {
             openModal();
             return;
         }
-        dispatch(setStep(0));
-        dispatch(resetState());
         navigate("/");
     };
 
@@ -79,11 +76,11 @@ export const ResultsPage: FC = () => {
         if (imageRef.current === null) {
             return;
         }
-        
-        const nodeToSave = imageRef.current as HTMLElement
+
+        const nodeToSave = imageRef.current as HTMLElement;
         console.log(nodeToSave);
-        
-        nodeToSave.style.width = '1100px'
+
+        nodeToSave.style.width = "1100px";
 
         toPng(imageRef.current, {
             backgroundColor: "#3A4654",
@@ -92,17 +89,16 @@ export const ResultsPage: FC = () => {
             },
         })
             .then((dataUrl) => {
-                nodeToSave.style.width = 'auto'
+                nodeToSave.style.width = "auto";
                 const link = document.createElement("a");
                 link.download = "psychocode-choice.png";
                 link.href = dataUrl;
                 link.click();
             })
             .catch((err) => {
-                nodeToSave.style.width = 'auto'
+                nodeToSave.style.width = "auto";
                 console.log(err);
             });
-
     }, [imageRef]);
 
     const onBackBtnClick = () => {
@@ -345,7 +341,11 @@ export const ResultsPage: FC = () => {
                 closeFunc={closeModal}
                 isOpen={modalIsOpen}
             /> */}
-             <DonateModal closeFunc={closeModal} isOpen={modalIsOpen} onAfterClose={onAfterModalClose}/>
+            <DonateModal
+                closeFunc={closeModal}
+                isOpen={modalIsOpen}
+                onAfterClose={onAfterModalClose}
+            />
         </>
     );
 };
