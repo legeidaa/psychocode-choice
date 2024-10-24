@@ -37,6 +37,27 @@
     &__p {
         font-size: 24px;
     }
+
+    &__h3 {
+        font-weight: 600;
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    &__li {
+        font-size: 24px;
+        &+& {
+            margin-top: 12px;
+        }
+    }
+
+    &-page-main {
+        text-align: justify;
+        margin-bottom: 80px;
+        .text__h3 {
+            text-align: center;
+        }
+    }
 }
 
 .error-text {
